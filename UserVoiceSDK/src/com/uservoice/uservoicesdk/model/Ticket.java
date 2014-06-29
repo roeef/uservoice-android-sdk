@@ -30,6 +30,14 @@ public class Ticket extends BaseModel {
         if (Babayaga.getUvts() != null)
             params.put("uvts", Babayaga.getUvts());
 
+        for (int i = 0; i < attachments.size(); ++i)
+        {
+        	TicketAttachment att = attachments.get(i);
+        	params.put(String.format("ticket[attachments][%d][name]",  i), att.getName());
+        	params.put(String.format("ticket[attachments][%d][content_type]",  i), att.getContentType());
+        	params.put(String.format("ticket[attachments][%d][data]",  i), att.getDataBase64());
+        }
+        
         for (Map.Entry<String, String> entry : getSession().getExternalIds().entrySet()) {
             params.put(String.format("created_by[external_ids][%s]", entry.getKey()), entry.getValue());
         }

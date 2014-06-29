@@ -7,6 +7,12 @@ public class TicketAttachment {
 	private byte[] data;
 	private String name;
 	
+	public TicketAttachment(String name, String contentType, byte[] data) {
+		this.contentType = contentType;
+		this.data = data.clone();
+		this.name = name;
+	}
+	
 	protected String getDataBase64() {
 		return Base64.encodeToString(data, Base64.DEFAULT);
 	}
