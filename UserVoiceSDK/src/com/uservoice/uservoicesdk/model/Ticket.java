@@ -1,5 +1,6 @@
 package com.uservoice.uservoicesdk.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,11 +13,11 @@ import com.uservoice.uservoicesdk.babayaga.Babayaga;
 
 public class Ticket extends BaseModel {
 
-    public static void createTicket(String message, Map<String, String> customFields, final Callback<Ticket> callback) {
-        createTicket(message, null, null, customFields, callback);
+    public static void createTicket(String message, Map<String, String> customFields, ArrayList<TicketAttachment> attachments, final Callback<Ticket> callback) {
+        createTicket(message, null, null, customFields, attachments, callback);
     }
 
-    public static void createTicket(String message, String email, String name, Map<String, String> customFields, final Callback<Ticket> callback) {
+    public static void createTicket(String message, String email, String name, Map<String, String> customFields, ArrayList<TicketAttachment> attachments, final Callback<Ticket> callback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("ticket[message]", message);
 

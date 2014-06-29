@@ -2,9 +2,12 @@ package com.uservoice.uservoicesdk;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.uservoice.uservoicesdk.model.TicketAttachment;
 
 public class Config {
     private String site;
@@ -21,8 +24,17 @@ public class Config {
     private boolean showContactUs = true;
     private boolean showKnowledgeBase = true;
     private Map<String, Object> userTraits = new HashMap<String, Object>();
+    private ArrayList<TicketAttachment> ticketAttachments = new ArrayList<TicketAttachment>();
 
-    public Config(String site) {
+    public ArrayList<TicketAttachment> getTicketAttachments() {
+		return ticketAttachments;
+	}
+
+	public void setTicketAttachments(ArrayList<TicketAttachment> ticketAttachments) {
+		this.ticketAttachments = ticketAttachments;
+	}
+
+	public Config(String site) {
         this.site = site;
     }
 

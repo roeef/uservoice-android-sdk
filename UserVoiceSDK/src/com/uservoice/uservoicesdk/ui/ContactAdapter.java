@@ -22,6 +22,7 @@ import com.uservoice.uservoicesdk.babayaga.Babayaga;
 import com.uservoice.uservoicesdk.babayaga.Babayaga.Event;
 import com.uservoice.uservoicesdk.model.CustomField;
 import com.uservoice.uservoicesdk.model.Ticket;
+import com.uservoice.uservoicesdk.model.TicketAttachment;
 import com.uservoice.uservoicesdk.rest.RestResult;
 
 public class ContactAdapter extends InstantAnswersAdapter {
@@ -30,10 +31,13 @@ public class ContactAdapter extends InstantAnswersAdapter {
     private int CUSTOM_PREDEFINED_FIELD = 9;
 
     private Map<String, String> customFieldValues;
+    
+    private ArrayList<TicketAttachment> ticketAttachments;
 
     public ContactAdapter(FragmentActivity context) {
         super(context);
         customFieldValues = new HashMap<String, String>(Session.getInstance().getConfig().getCustomFields());
+        ticketAttachments = new ArrayList<TicketAttachment>(Session.getInstance().getConfig().getTicketAttachments());
         continueButtonMessage = R.string.uv_contact_continue_button;
     }
 
@@ -138,7 +142,7 @@ public class ContactAdapter extends InstantAnswersAdapter {
     @Override
     protected void doSubmit() {
         if (validateCustomFields()) {
-            Ticket.createTicket(textField.getText().toString(), emailField.getText().toString(), nameField.getText().toString(), customFieldValues, new DefaultCallback<Ticket>(context) {
+            Ticket.createTicket(textField.getText().toString(), emailField.getText().toString(), nameField.getText().toString(), customFieldValues, ticketAttachments, new DefaultCallback<Ticket>(context) {
                 @Override
                 public void onModel(Ticket model) {
                     Babayaga.track(Event.SUBMIT_TICKET);
